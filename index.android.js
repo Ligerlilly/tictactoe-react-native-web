@@ -1,8 +1,18 @@
 import React, { Component, AppRegistry } from 'react-native';
 import Root           from './app/native/containers/Root';
-import configureStore from './app/store/configureStore.prod.js';
+import { createStore, applyMiddleware, compose } from 'redux'
+import rootReducer from './app/reducers'
+import createSagaMiddleware from 'redux-saga'
+import createLogger from 'redux-logger'
+import rootSaga from './app/sagas'
 
-const store = configureStore();
+const logger = createLogger()
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+    rootReducer,
+    applyMiddleware(sagaMiddleware, logger)
+)
+sagaMiddleware.run(rootSaga)
 
 class ReactNativeelloWorld extends Component {
   render() {

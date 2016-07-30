@@ -1,17 +1,14 @@
-import React, { Component, PropTypes } from 'react-native';
+import React, { Component } from 'react-native';
 import { Provider } from 'react-redux/native';
-import PortfolioInsights from './App';
+import App from './App';
+
 
 export default class Root extends Component {
   render() {
     return (
-      <Provider store={this.props.store}>
-        {() => <PortfolioInsights />}
+      <Provider store={store}>
+        {() => <App />}
       </Provider>
     );
   }
 }
-
-Root.propTypes = {
-  store: PropTypes.object.isRequired,
-};

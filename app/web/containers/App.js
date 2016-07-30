@@ -1,38 +1,64 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// dumb components
-import Header     from '../components/Header';
-import HelloWorld from '../components/HelloWorld';
-// actions
-import {
-  toggleColor,
-} from '../../actions/actions';
+import JoinInterface from '../components/JoinInterface'
+import ChallengeInterface from '../components/ChallengeInterface'
+import ActiveChallengeInterface from './ActiveChallengeInterface'
+//import * as actions from '../../actions'
+import Lobby from './Lobby'
 
-/** The app entry point */
-class ReactNativeWebHelloWorld extends Component {
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
-    // injected by connect call
-    const { dispatch, color, data } = this.props;
+    const username = this.props.session.username
+    const challengedPlayer = this.props.challengedPlayer
+    const activeChallenge = this.props.activeChallenge
+    const visible = this.props.visible.status
+    const { dispatch } = this.props.store
+    let toShow = ''
+
+    if (!this.props.challengeID.id) {
+      debugger
+      switch (visible) {
+        case 'roster':
+        toShow = <Lobby />;
+        break;
+        case 'join':
+        toShow = <JoinInterface/>;
+        break;
+        case 'challenge':
+        toShow = <ChallengeInterface/>;
+        break;
+        case 'gameboard':
+        toShow = <GameBoard/>;
+        break;
+        default:
+        if (username) {
+         toShow = <Lobby />
+        } else {
+         toShow = <JoinInterface dispatch={dispatch}/>;
+        }
+      }
+    } else if (challengedPlayer === username) {
+      toShow =  <ActiveChallengeInterface />;
+    } else {
+      toShow = <ChallengeInterface/>;
+    }
 
     return (
-      <div className="react-native-web">
-        <Header />
-        <HelloWorld
-          onClick={() => dispatch(toggleColor())}
-          color={color}
-        />
+      <div>
+      <h2>TicTacToe Lobby</h2>
+        {toShow}
       </div>
-    );
+    )
   }
 }
 
-ReactNativeWebHelloWorld.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  color: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired,
-};
+function mapStateToProps(state) {
+  return state;
+}
 
-const select = state => state;
-
-// Wrap the component to inject dispatch and state into it
-export default connect(select)(ReactNativeWebHelloWorld);
+export default connect(mapStateToProps)(App);

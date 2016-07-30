@@ -1,12 +1,15 @@
-import React          from 'react';
-import { render }     from 'react-dom';
-import Root           from './containers/Root';
-import configureStore from '../store/configureStore';
+import "babel-polyfill"
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './containers/App'
+import createStoreWithMiddleware from '../store'
 
-// load our css
-require('./styles/style.less');
+const store = createStoreWithMiddleware()
 
-const store = configureStore();
-const rootElement = document.getElementById('root');
-
-render( <Root store={store} />, rootElement );
+render(
+  <Provider store={store}>
+    <App store={store}/>
+  </Provider>,
+  document.getElementById('root')
+)
