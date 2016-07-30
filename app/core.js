@@ -21,7 +21,6 @@ export function setChallengedPlayer(state, challengedPlayer) {
 }
 
 export function setChallengeID(state, id) {
-  debugger
   return {id: id}
 }
 

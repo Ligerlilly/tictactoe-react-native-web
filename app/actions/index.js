@@ -3,7 +3,7 @@ export const LOGIN = 'LOGIN'
 export const RECEIVE_CHALLENGE_ID = 'RECEIVE_CHALLENGE_ID'
 export const CHALLENGER_PLAYER = 'CHALLENGER_PLAYER'
 export const CHALLENGED_PLAYER = 'CHALLENGED_PLAYER'
-export const CHALLENGE_PLAYER = 'CHALLENGE_PLAYER'
+//export const CHALLENGE_PLAYER = 'CHALLENGE_PLAYER'
 
 export function getPlayers() {
   return {
@@ -32,13 +32,16 @@ export function session(username) {
   }
 }
 
-// export function activeChallenge(username) {
-//   debugger
-// }
+export function activeChallenge(username) {
+  return {
+    type: 'ACTIVE_CHALLENGE',
+    username: username,
+  }
+}
 
 export function challenge(playerName, username) {
   return {
-    type: CHALLENGE_PLAYER,
+    type: 'CHALLENGE_PLAYER',
     playerName: playerName,
     username: username,
   }

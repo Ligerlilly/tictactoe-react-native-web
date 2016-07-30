@@ -21,7 +21,6 @@ class App extends Component {
     let toShow = ''
 
     if (!this.props.challengeID.id) {
-      debugger
       switch (visible) {
         case 'roster':
         toShow = <Lobby />;

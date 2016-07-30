@@ -19,7 +19,7 @@ export function challengePlayer(challengedPlayer, playerName) {
 
 // http://localhost:9090/lobby/challenge/' + self.challenge.challengeID
 
-export function isChallenged(playerName) {
+export function hasChallenge(playerName) {
   return fetch('http://localhost:9090/lobby/roster/' + playerName + '/challenge').then(
     res => res.json()
   );

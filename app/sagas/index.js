@@ -18,8 +18,14 @@ function* joinPlayer(action) {
 
 function* challengePlayer(action) {
   const resp = yield call(client.challengePlayer, action.playerName, action.username)
-  debugger
   yield put( actions.challengeID(resp) )
+}
+
+function* hasChallenge(action) {
+  const resp = yield call(client.hasChallenge, action.username)
+  if (resp.challengeID) {
+    yield put( actions.challengeID(resp) )
+  }
 }
 
 export default function *root() {
@@ -28,5 +34,6 @@ export default function *root() {
     takeEvery("JOIN_PLAYER", joinPlayer),
     takeEvery("LOAD_PLAYERS", loadPlayers),
     takeEvery("CHALLENGE_PLAYER", challengePlayer),
+    takeEvery("ACTIVE_CHALLENGE", hasChallenge),
   ]
 }

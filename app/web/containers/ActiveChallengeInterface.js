@@ -29,7 +29,7 @@ export default class ActiveChallengeInterface extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return state.toJSON();
+  return state
 }
 
-export default connect(mapStateToProps, actionCreators)(ActiveChallengeInterface);
+export default connect(mapStateToProps)(ActiveChallengeInterface);

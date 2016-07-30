@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { challenge } from '../../actions';
+import { challenge, activeChallenge } from '../../actions';
 
 
 export default class Player extends React.Component {
@@ -15,13 +15,13 @@ export default class Player extends React.Component {
 
     componentDidMount() {
       const activeChallenge = this.props.activeChallenge
-      const username = this.props.username
+      const username = this.props.session.username
       const challengeID = this.props.challengeID
-      // this.daemon = setInterval( function() {
-      //   if (!challengeID) {
-      //     activeChallenge(username);
-      //   }
-      // }, 2000 );
+      this.daemon = setInterval( function() {
+        if (!challengeID.id) {
+          activeChallenge(username);
+        }
+      }, 2000 );
     }
 
     challengePlayer(playerName, username) {
@@ -53,4 +53,4 @@ function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, { challenge })(Player);
+export default connect(mapStateToProps, { challenge, activeChallenge })(Player);
