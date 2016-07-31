@@ -1,20 +1,9 @@
 import React, { Component, AppRegistry } from 'react-native';
-import Root           from './app/native/containers/Root';
-import { createStore, applyMiddleware, compose } from 'redux'
-import rootReducer from './app/reducers'
-import createSagaMiddleware from 'redux-saga'
-import createLogger from 'redux-logger'
-import rootSaga from './app/sagas'
+import Root from './app/native/containers/Root';
+import createStoreWithMiddleware from './app/store'
+const store = createStoreWithMiddleware()
 
-const logger = createLogger()
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(
-    rootReducer,
-    applyMiddleware(sagaMiddleware, logger)
-)
-sagaMiddleware.run(rootSaga)
-
-class ReactNativeelloWorld extends Component {
+class ReactNativeWorld extends Component {
   render() {
     return (
       <Root store={store} />
@@ -22,4 +11,4 @@ class ReactNativeelloWorld extends Component {
   }
 }
 
-AppRegistry.registerComponent('ReactNativeWebHelloWorld', () => ReactNativeelloWorld);
+AppRegistry.registerComponent('ReactNativeWebHelloWorld', () => ReactNativeWorld);

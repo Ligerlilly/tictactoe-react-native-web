@@ -1,4 +1,4 @@
-import React, { Component, View } from 'react-native';
+import React, { Component, View, Text } from 'react-native';
 import { connect }  from 'react-redux/native';
 
 // dumb components
@@ -13,13 +13,13 @@ class App extends Component {
     const { dispatch } = this.props;
 
     return (
-      <View style={appStyle.reactNativeWeb}>
-        <Login />
+      <View style={{flex: 1}}>
+        <Text style={{ flex: .1, fontSize: 20, alignSelf: 'center'}}>TicTacToe Lobby</Text>
+        <Login style={{flex: .9}} />
       </View>
     );
   }
 }
-
 
 const select = state => state;
 

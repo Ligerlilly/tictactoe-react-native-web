@@ -46,6 +46,19 @@ export function challenge(playerName, username) {
     username: username,
   }
 }
+
+export function joinPlayer(username) {
+  return {
+    type: 'JOIN_PLAYER',
+    playerName: username,
+  }
+}
+
+export function loadPlayers() {
+  return {
+    type: 'LOAD_PLAYERS',
+  }
+}
 //
 // export function challengedPlayer(challengedPlayer) {
 //   debugger
